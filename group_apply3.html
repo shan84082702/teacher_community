@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <title>教師社群平台|社群計畫申請</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="bower_components/Ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="bower_components/jvectormap/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="dist/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" />
+    <link href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        .message {
+            border-style: solid;
+            border-color: gray;
+            margin-left: 20px;
+        }
+
+        .modal_table {
+            border-style: solid;
+            border-color: gray;
+            border-radius: 10px;
+            height: 50px;
+        }
+
+        .popup {
+            border-style: solid;
+            border-color: gray;
+
+            width: auto;
+        }
+
+        .deletebutton {
+            margin-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 975px) {
+            .message {
+                width: auto;
+                margin-right: 20px;
+            }
+        }
+
+        .plus-minus-input {
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .plus-minus-input .input-group-field {
+            text-align: center;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            padding: 1rem;
+        }
+
+        .plus-minus-input .input-group-field::-webkit-inner-spin-button,
+        .plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .plus-minus-input .input-group-button .circle {
+            border-radius: 50%;
+            padding: 0.25em 0.8em;
+        }
+
+        .member {
+            border-radius: 15px;
+            border-color: gray;
+            height: auto;
+            border-style: solid;
+            width: 75%;
+            margin-left: 2.5%;
+            margin-top: 1%;
+
+        }
+
+        .subtitle {
+            font-size: 25px;
+            font-weight: bold;
+            margin-left: 3.5%;
+        }
+
+        .ckeditor {
+            width: 80%;
+            margin-left: 3.5%;
+            margin-top: 1%;
+        }
+
+        span {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <a class="logo" href="index.html" style="height: 64px;">
+                <span class="logo-mini"><b></b></span>
+                <span class="logo-lg"><b style="font-size:19px;">教師教學成長社群平台</b></span>
+            </a>
+            <nav class="navbar navbar-static-top">
+                <a class="sidebar-toggle" data-toggle="push-menu" href="#" role="button" style="height: 64px;"><span
+                        class="sr-only">Toggle navigation</span></a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a>
+                                <span class="hidden-xs" id="username" style="font-size:20px">User Name&nbsp;</span>
+                                <span class="hidden-xs" style="font-size:16px" id="usertitle">User Title&nbsp;</span>
+                                <button class="btn" id="logout_btn" style="color:#707070" type="button">登出</button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu" data-widget="tree" id="menu"></ul>
+            </section>
+        </aside>
+        <div class="content-wrapper" style="min-height: 960px;">
+            <br />
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align:center">
+                            <a style="font-size: 30px;color: #000000">長庚大學教師教學成長社群計劃申請表</a>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left:5%;">
+                        <div class="col-sm-9">
+                            <span class="subtitle">第三部分 經費預算表</span>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </section>
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row" style="border-style:solid;border-color:gray;margin-left:6%;margin-right:5%;">
+                        <div class="box-body">
+                            <div class="row">
+                                <div><span class="subtitle">說明:</span></div>
+                                <div style="margin-left: 3.5%;"><span>1. 社群計畫補助各社群經常門之相關業務費用為主。</span></div>
+                                <div style="margin-left: 3.5%;"><span>2. 預算表之經費明細說明請述明清楚，加總數據請務必正確無誤。</span></div>
+                                <div style="margin-left: 3.5%;"><span>3.
+                                        活動費用的編列請力求合理，並需配合活動性質及活動時間長短。費用以補助社群成員活動為原則，請避免編列參與學生或其他非社群社員之活動費用。</span>
+                                </div>
+                                <div style="margin-left: 3.5%;"><span>4. 下述表格不敷使用請自行增減，請依據本校主計室核銷規定編列及執行。</span></div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div><span class="subtitle">經費預算總表</span></div>
+                            </div>
+                            <div class="row member">
+                                <div style="margin-left:20px;margin-top:1%;margin-bottom:1%;">
+                                    <label for="inputEmail3">經費項目：</label>
+                                    <select id="gp3_item" 
+                                        style="height:30px;width:20%;margin-left:0.5%;margin-right:2%;" ></select>
+                                    <label for="inputEmail3">單價：</label>
+                                    <input type="text" id="gp3_cost" size="10%"
+                                        style="height:30px;margin-left:0.5%;margin-right:0.5%;" >
+                                    <span style="margin-right:2%;font-size: 10px;">新台幣(元)</span>
+                                    <label for="inputEmail3">數量：</label>
+                                    <input type="text" id="gp3_num" size="10%"
+                                        style="height:30px;margin-left:0.5%;margin-right:3%;" />
+                                </div>
+                                <div class="form-class" style="margin-left:20px;margin-top:1%;margin-bottom:1%;">
+                                    <label for="inputEmail3">說明：</label>
+                                    <input type="text" id="gp3_description" size="80%"
+                                        style="height:30px;margin-left:0.5%;margin-right:3%;" />
+                                    <a class="btn btn-primary" id="gp3_btnadd">新增</a>
+                                </div>
+                            </div>
+                            <div style="margin-top:1%;">
+                                <a class="btn btn-danger" style="margin-left:2.5%;" id="gp3_btndelete">刪除</a>
+                            </div>
+                            <div class="row member">
+                                <div class="box-body" style="margin-left:10px;margin-right:20px;">
+                                    <table id="money_table" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">ID</th>
+                                                <th><input type="checkbox" name="gp3_CheckAll" id="gp3_CheckAll" /></th>
+                                                <th>經費項目</th>
+                                                <th>單價</th>
+                                                <th>數量</th>
+                                                <th>總價</th>
+                                                <th>說明</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-6" style="text-align:center">
+                                    <button class="btn btn-warning" id="gp3_prebtn" type="button">上一步</button>
+                                </div>
+                                <div class="col-sm-6" style="text-align:center">
+                                    <button class="btn btn-warning" id="gp3_savebtn" type="button">儲存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <div class="control-sidebar-bg"></div>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="dist/js/adminlte.min.js"></script>
+    <script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="bower_components/chart.js/Chart.js"></script>
+    <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="ckeditor/ckeditor.js"></script>
+    <script src="dist/js/demo.js"></script>
+    <script src="dist/js/cookie.js"></script>
+    <script src="dist/js/general.js"></script>
+    <script src="dist/js/group.js"></script>
+
+    <script>
+        getMenu(2);
+        group_apply_3_init();
+    </script>
+
+
+</body>
+
+</html>

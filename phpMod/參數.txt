@@ -1,0 +1,198 @@
+msg
+200 成功
+204	token 過期
+205	照片上傳失敗
+206	沒有這個token
+207	帳號重複(新增帳密的地方)
+208	帳號不存在
+209	沒有這種執行方法(method錯誤)
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////acconut 帳號管理
+method=0	新增帳號//未完成
+=>account,name,password,email,sno_role,sno_subject
+=>msg
+----------------------------------------
+method=1	登入
+=>account,password
+=>msg,token,name,title
+----------------------------------------
+method=2	修改密碼
+=>token,password
+=>msg
+----------------------------------------
+method=3	登出
+=>token
+=>msg
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////group_apply 申請社群
+method=0	新增空的申請表
+=>token
+=>msg,sno_project	(申請表流水號)
+----------------------------------------
+method=1	列出所有申請表
+=>token,year
+=>msg,out[[sno_project,updated_at,project_time,project_status,project_approval,project_name]]
+----------------------------------------第一頁
+method=2	修改申請表(按下一步)
+=>token,sno_project,project_name,project_time,project_type,assistant,assistant_desc
+=>msg
+----------------------------------------
+method=3	給院名稱
+=>token
+=>msg,out[sno_institute,institute]	(院流水號，院名稱)
+----------------------------------------
+method=4	給系名稱
+=>token,sno_institute(院流水號)
+=>msg,out[sno_department,department]	(系流水號，系名稱)
+----------------------------------------
+method=5	給名字
+=>token,sno_department(系流水號)
+=>msg,out[sno_member,name]	(人員流水號，人員名稱)
+----------------------------------------
+method=6	給人員資料
+=>token,sno_member
+=>msg,out[sno_member,name,email,institute,department,title,office,phone]	(人員流水號，人員名稱，email，院，系，稱謂，辦公室號碼，手機)
+----------------------------------------
+method=7	新增活動人員
+=>token,sno_member_s[],sno_project
+=>msg
+----------------------------------------
+method=8	刪除活動人員
+=>token,sno_member_s[],sno_project
+=>msg
+----------------------------------------
+method=9	列出所有參加該活動人員名稱
+=>token,sno_project
+=>msg,out[sno_member,name,email,institute,department,title,office,phone]	(人員流水號，人員名稱，email，院，系，稱謂，辦公室號碼，手機)
+----------------------------------------
+method=10	列出有哪些年分
+=>token
+=>msg,year[]
+----------------------------------------第二頁
+method=11	更新整體計畫內容(沒有重要活動規劃)
+=>token,project_d1,project_d2,project_d4,sno_project
+=>msg
+----------------------------------------
+method=12	新增重要活動規劃
+=>token,sno_project,plan_date,plan_text
+=>msg
+----------------------------------------
+method=13	刪除重要活動規劃
+=>token,sno_plan
+=>msg
+----------------------------------------
+method=14	列出所有重要活動規劃
+=>token,sno_project
+=>msg,out[sno_plan,plan_date,plan_text]
+----------------------------------------第三頁
+method=15	列出經費項目
+=>token
+=>msg,out[sno_funding,funding_name]
+----------------------------------------
+method=16	列出所有經費預算總表
+=>token,sno_project
+=>msg,out[sno_money,sno_project,sno_funding,funding_name,money_price,money_count,money_description]
+----------------------------------------
+method=17	新增經費預算
+=>token,sno_funding,sno_project,money_price,money_count,money_description
+=>msg
+----------------------------------------
+method=18	刪除經費預算
+=>token,sno_money
+=>msg
+----------------------------------------下面是編輯，有列表的就用上面的，因為一樣
+method=19	編輯第一頁的全部(除了最下面的列表)
+=>token,sno_project
+=>msg,(只會有一筆資料，所以沒有用陣列包)out[sno_project,project_name,project_time,project_type,sno_member,name,email,sno_department,department,sno_institute,institute,title,office,phone,assistant,
+assistant_name,assistant_email,assistant_sno_department,assistant_department,assistant_sno_institute,assistant_institute,assistant_title,assistant_office,assistant_phone,assistant_desc]
+----------------------------------------
+method=20	編輯第二頁的1,2,4
+=>token,sno_project
+=>msg,(只會有一筆資料)out[project_d1,project_d2,project_d4]
+----------------------------------------
+編輯第二頁的3跟第三頁都是列表，上面已經有了(在新增的地方)
+----------------------------------------下方是詳細資料，有列表的就用上面的，因為一樣
+method=21	詳細資料第一頁的全部(除了最下面的列表)
+=>token,sno_project
+=>msg,(只會有一筆資料，所以沒有用陣列包)out[sno_project,project_name,project_time,project_type,sno_member,name,email,sno_department,department,sno_institute,institute,title,office,phone,assistant,
+assistant_name,assistant_email,assistant_sno_department,assistant_department,assistant_sno_institute,assistant_institute,assistant_title,assistant_office,assistant_phone,assistant_desc]
+----------------------------------------
+method=22	詳細資料第二頁的1,2,4
+=>token,sno_money
+=>msg,(只會有一筆資料)out[project_d1,project_d2,project_d4]
+----------------------------------------
+詳細資料第二頁的3跟第三頁都是列表，上面已經有了(在新增的地方)
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////group_report 社群成果報告
+method=1	顯示第一部分基本資料(report_seniority是年資，如果是0就是首次成立，其他數字則是多少年度)
+=>token,sno_project
+=>msg,out[sno_project,project_name,project_time,project_type,report_seniority,sno_member,name,title,sno_department,department,
+sno_institute,institute,member_list[sno_attend,name,department,institute,title,attend_hour]]
+----------------------------------------
+method=2	顯示第二部分社群執行成果
+=>token,sno_project
+=>msg,out[report_d1,report_d2,report_d3,report_d4,report_d5,file[sno_file,file_path,file_description]]
+----------------------------------------
+method=3	更新第一部分基本資料(只有年資跟研習時數可以更新)
+=>token,report_seniority,sno_project,hours[],sno_attend[]		(report_seniority是年資，如果是0就是首次成立，其他數字則是多少年度)
+=>msg
+----------------------------------------
+method=4	更新第二部分社群執行成果(上半部，沒有檔案)
+=>token,report_d1,report_d2,report_d3,report_d4,report_d5,sno_project
+=>msg
+----------------------------------------
+method=5	更新第二部分檔案(如果更新檔案會變成先刪除檔案然後再新增檔案。更新的部分只有文字更新(沒有改變檔案的就丟這邊))
+=>token,sno_project,del_file[](刪除流水號),insert_des[](新增圖片的描述),update_file[](更新敘述的檔案流水號),update_des[](更新圖片的描述)
+=>msg
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////activity_management 活動管理
+method=1	選擇社群
+=>token
+=>msg,out[sno_project,project_name]
+----------------------------------------
+method=2	列出活動列表
+=>token,sno_project
+=>msg,out[sno_plan,plan_text,plan_date,plan_status],edit
+----------------------------------------
+method=3	新增活動
+=>token,sno_project,plan_text,plan_date
+=>msg
+----------------------------------------
+method=4	修改活動
+=>token,sno_plan,plan_text,plan_date
+=>msg
+----------------------------------------
+method=7	活動管理列表的刪除
+=>token,sno_plan
+=>msg
+----------------------------------------//活動紀錄表內部
+method=5	取得活動紀錄表內容
+=>token
+=>msg,out[sno_plan,project_name,plan_text,plan_date,plan_date_end,plan_location,plan_people,plan_record] (plan_date開始日期，plan_date_end結束日期)
+----------------------------------------
+method=6	儲存活動記錄表
+=>token,sno_plan,plan_text,plan_date,plan_date_end,plan_location,plan_people,plan_record	(plan_date開始日期，plan_date_end結束日期)
+=>msg
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////email	寄信
+method=0	寄信
+=>token,sno_member_s[](人員id們),message_header,message_content,sno_project
+=>msg
+----------------------------------------
+method=1	列出社群
+=>token
+=>msg,out[sno_project,project_name]
+----------------------------------------
+method=2	選完社群，列出人員
+=>token,sno_project
+=>msg,out[sno_member,department,institute,name,title,office,phone,email]
+----------------------------------------
+method=3	列出信件
+=>token
+=>msg,out[message_sender,name,message_header,message_content,sno_project,project_name]
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////approval	審核
+method=0	審核通過或不通過
+=>token,sno_project,project_approval(審核通過傳1，未通過傳0)
+=>msg
+----------------------------------------
